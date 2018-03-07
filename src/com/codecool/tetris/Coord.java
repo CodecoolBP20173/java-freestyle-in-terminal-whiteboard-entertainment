@@ -30,6 +30,22 @@ public class Coord {
             case LEFT:
                 this.x--;
                 break;
+            case UPRIGHT:
+                this.x++;
+                this.y++;
+                break;
+            case DOWNRIGHT:
+                this.x++;
+                this.y--;
+                break;
+            case DOWNLEFT:
+                this.x--;
+                this.y--;
+                break;
+            case UPLEFT:
+                this.x--;
+                this.y++;
+                break;
         }
     }
 }
