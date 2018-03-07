@@ -16,9 +16,9 @@ public class Shapes {
             TerminalDirection.RIGHT
         });
         m.put("Z_mirrored", new TerminalDirection[] {
-            TerminalDirection.LEFT,
-            TerminalDirection.UPRIGHT,
-            TerminalDirection.RIGHT
+            TerminalDirection.DOWNLEFT,
+            TerminalDirection.RIGHT,
+            TerminalDirection.UPRIGHT
         });
         m.put("T", new TerminalDirection[] {
             TerminalDirection.DOWNLEFT,
