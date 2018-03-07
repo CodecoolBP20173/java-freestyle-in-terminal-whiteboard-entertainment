@@ -55,4 +55,14 @@ public class Shapes {
             });
         }
     }
+
+    public class TShape extends Shaoe {
+        TShape(int x, int y, BGColor color){
+            super(x, y, color, new TerminalDirection[] {
+                TerminalDirection.RIGHT,
+                TerminalDirection.DOWN,
+                TerminalDirection.UPRIGHT
+            });
+        }
+    }
 }
