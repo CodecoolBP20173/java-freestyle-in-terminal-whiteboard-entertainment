@@ -19,6 +19,9 @@ public class Coord {
 
     public void changeCoords(TerminalDirection direction) {
         switch (direction) {
+            case UP:
+                this.Y -= 1;
+                break;
             case DOWN:
                 this.Y -= 1;
                 break;
