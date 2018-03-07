@@ -19,10 +19,11 @@ public class Board {
     }
 
     public void render(Terminal t) {
+        printLogo();
         for (int i=0; i<row; i++){
             for (int j=0; j<column; j++) {
                 t.setBgColor(board[i][j]);
-                System.out.print(" 0 ");
+                System.out.print("  ");
                 t.resetStyle();
             }
             System.out.println("");
@@ -65,7 +66,7 @@ public class Board {
         BGColor color = sh.getColor();
         //board[coords[0]][coords[1]] = color;
 
-        
+
         int shapeX = coords[0];
         int shapeY = coords[1];
         Coord shapePos = new Coord(shapeX, shapeY);
@@ -77,10 +78,28 @@ public class Board {
             x = shapePos.getCoordArray()[0];
             y = shapePos.getCoordArray()[1];
             board[y][x] = color;
-            
+
         }
-            
+
     }
+                                                                        
+    public void printLogo() {
+        System.out.print("\033[48;5;231m");
+        System.out.print("\033[38;5;202m");
+    
+
+        String logo = "                                                                           \n";
+        logo += "  ooooooooooooo oooooooooooo ooooooooooooo ooooooooo.   ooooo  .oooooo..o  \n"; 
+        logo += "  8'   888   `8 `888'     `8 8'   888   `8 `888   `Y88. `888' d8P'    `Y8  \n";
+        logo += "       888       888              888       888   .d88'  888  Y88bo.       \n";
+        logo += "       888       888oooo8         888       888ooo88P'   888   `\"Y8888o.   \n";
+        logo += "       888       888    \"         888       888`88b.     888       `\"Y88b  \n";
+        logo += "       888       888       o      888       888  `88b.   888  oo     .d8P  \n";
+        logo += "      o888o     o888ooooood8     o888o     o888o  o888o o888o 8\"\"88888P'   \n";
+        logo += "                                                                           \n\n\n";
+        
+        System.out.print(logo);
+}      
 
     Board(int row, int column) {
         this.row = row;
