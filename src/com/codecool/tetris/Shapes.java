@@ -33,7 +33,7 @@ public class Shapes {
         m.put("L_mirrored", new TerminalDirection[] {
             TerminalDirection.DOWN,
             TerminalDirection.DOWN,
-            TerminalDirection.Left
+            TerminalDirection.LEFT
         });
         m.put("I", new TerminalDirection[] {
             TerminalDirection.DOWN,
