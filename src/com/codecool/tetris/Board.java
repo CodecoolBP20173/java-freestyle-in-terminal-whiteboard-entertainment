@@ -1,6 +1,7 @@
 package com.codecool.tetris;
 
 import com.codecool.termlib.*;
+import com.codecool.tetris.Shapes.Shape;
 
 
 public class Board {
@@ -21,7 +22,7 @@ public class Board {
         for (int i=0; i<row; i++){
             for (int j=0; j<column; j++) {
                 t.setBgColor(board[i][j]);
-                System.out.print(" O ");
+                System.out.print(" 0 ");
                 t.resetStyle();
             }
             System.out.println("");
@@ -33,6 +34,7 @@ public class Board {
     * @param row A row full of BGColors
     **/
     public boolean isRowFull(BGColor[] row) {
+
         for (int i=0; i<row.length; i++) {
             if (row[i] == BGColor.BLACK) {
                 return false;
@@ -51,10 +53,33 @@ public class Board {
         for (int i=rowIndex; i>0; i--) {
             board[i] = board[i - 1];
         }
-        
+
         for (int j=0; j<column; j++) {
             board[0][j] = BGColor.BLACK;
         }
+    }
+
+    public void addShape(Shape sh){
+        int[] coords = sh.getCoords();
+        TerminalDirection[] formula = sh.getFormula();
+        BGColor color = sh.getColor();
+        //board[coords[0]][coords[1]] = color;
+
+        
+        int shapeX = coords[0];
+        int shapeY = coords[1];
+        Coord shapePos = new Coord(shapeX, shapeY);
+        int x = shapePos.getCoordArray()[0];
+        int y = shapePos.getCoordArray()[1];
+        board[y][x] = color;
+        for (TerminalDirection dir : formula) {
+            shapePos.changeCoords(dir);
+            x = shapePos.getCoordArray()[0];
+            y = shapePos.getCoordArray()[1];
+            board[y][x] = color;
+            
+        }
+            
     }
 
     Board(int row, int column) {
