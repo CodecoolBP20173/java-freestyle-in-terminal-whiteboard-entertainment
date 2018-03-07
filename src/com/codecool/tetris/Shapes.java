@@ -74,6 +74,10 @@ public class Shapes {
             return this.coords.getCoordArray();
         }
 
+        public TerminalDirection[] getFormula() {
+            return this.formula;
+        }
+
         Shape(int x, int y, BGColor color, TerminalDirection[] formula) {
             this.color = color;
             this.coords = new Coord(x, y);
