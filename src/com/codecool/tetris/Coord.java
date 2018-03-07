@@ -11,13 +11,13 @@ public class Coord {
         this.X = x;
         this.Y = y;
     }
-    
+
     public int[] getCoord() {
 
         return new int[] {this.X, this.Y};
     }
 
-    public void changeCoords(Direction direction) {
+    public void changeCoords(TerminalDirection direction) {
         switch (direction) {
             case Direction.DOWN: this.Y -= 1;
             break;
