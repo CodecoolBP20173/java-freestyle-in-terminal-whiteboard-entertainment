@@ -11,39 +11,39 @@ public class Shapes {
     private static Map<String, TerminalDirection[]> fillMap(){
         Map<String, TerminalDirection[]> m = new HashMap<>();
         m.put("Z", new TerminalDirection[] {
-            TerminalDirection.RIGHT,
-            TerminalDirection.DOWN,
+            TerminalDirection.LEFT,
+            TerminalDirection.DOWNRIGHT,
             TerminalDirection.RIGHT
         });
         m.put("Z_mirrored", new TerminalDirection[] {
-            TerminalDirection.RIGHT,
-            TerminalDirection.UP,
+            TerminalDirection.LEFT,
+            TerminalDirection.UPRIGHT,
             TerminalDirection.RIGHT
         });
         m.put("T", new TerminalDirection[] {
+            TerminalDirection.DOWNLEFT,
             TerminalDirection.RIGHT,
-            TerminalDirection.DOWN,
-            TerminalDirection.UPRIGHT
+            TerminalDirection.RIGHT
         });
         m.put("L", new TerminalDirection[] {
-            TerminalDirection.RIGHT,
-            TerminalDirection.UPLEFT,
-            TerminalDirection.UP
+            TerminalDirection.DOWN,
+            TerminalDirection.DOWN,
+            TerminalDirection.RIGHT
         });
         m.put("L_mirrored", new TerminalDirection[] {
-            TerminalDirection.RIGHT,
-            TerminalDirection.UP,
-            TerminalDirection.UP
+            TerminalDirection.DOWN,
+            TerminalDirection.DOWN,
+            TerminalDirection.Left
         });
         m.put("I", new TerminalDirection[] {
-            TerminalDirection.UP,
-            TerminalDirection.UP,
-            TerminalDirection.UP
+            TerminalDirection.DOWN,
+            TerminalDirection.DOWN,
+            TerminalDirection.DOWN
         });
         m.put("Square", new TerminalDirection[] {
-            TerminalDirection.UP,
             TerminalDirection.RIGHT,
-            TerminalDirection.DOWN
+            TerminalDirection.DOWN,
+            TerminalDirection.LEFT
         });
         return m;
     }
