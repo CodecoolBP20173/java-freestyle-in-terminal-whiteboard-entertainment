@@ -98,4 +98,10 @@ public class Shapes {
             super(x, y, color, shapeForms.get("T"));
         }
     }
+
+    public static class LShape extends Shape {
+        LShape(int x, int y, BGColor color, boolean mirr){
+            super(x, y, color, mirr? shapeForms.get("L_mirrored") : shapeForms.get("L"));
+        }
+    }
 }
