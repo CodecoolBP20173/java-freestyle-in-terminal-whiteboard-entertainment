@@ -19,11 +19,11 @@ public class Coord {
 
     public void changeCoords(TerminalDirection direction) {
         switch (direction) {
-            case Direction.DOWN: this.Y -= 1;
+            case TerminalDirection.DOWN: this.Y -= 1;
             break;
-            case Direction.RIGHT: this.X += 1;
+            case TerminalDirection.RIGHT: this.X += 1;
             break;
-            case Direction.LEFT: this.X -= 1;
+            case TerminalDirection.LEFT: this.X -= 1;
             break;
         }
     }
