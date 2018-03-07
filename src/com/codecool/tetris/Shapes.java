@@ -56,7 +56,7 @@ public class Shapes {
         }
     }
 
-    public class TShape extends Shaoe {
+    public class TShape extends Shape {
         TShape(int x, int y, BGColor color){
             super(x, y, color, new TerminalDirection[] {
                 TerminalDirection.RIGHT,
