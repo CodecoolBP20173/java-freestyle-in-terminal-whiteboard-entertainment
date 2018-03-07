@@ -45,4 +45,14 @@ public class Shapes {
             });
         }
     }
+
+    public class ZShape extends Shape {
+        ZShape(int x, int y, BGColor color){
+            super(x, y, color, new TerminalDirection[] {
+                TerminalDirection.RIGHT,
+                TerminalDirection.UP,
+                TerminalDirection.RIGHT
+            });
+        }
+    }
 }
