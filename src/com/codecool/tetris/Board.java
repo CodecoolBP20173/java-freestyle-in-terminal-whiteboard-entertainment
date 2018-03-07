@@ -60,13 +60,14 @@ public class Board {
         }
     }
 
-    public void addShape(Shape sh){
+    public void removeShape(Shape sh, BGColor color){
+        addShape(sh, color);
+    }
+
+    public void addShape(Shape sh, BGColor color){
         int[] coords = sh.getCoords();
         TerminalDirection[] formula = sh.getFormula();
-        BGColor color = sh.getColor();
-        //board[coords[0]][coords[1]] = color;
-
-
+        
         int shapeX = coords[0];
         int shapeY = coords[1];
         Coord shapePos = new Coord(shapeX, shapeY);
