@@ -104,4 +104,10 @@ public class Shapes {
             super(x, y, color, mirr? shapeForms.get("L_mirrored") : shapeForms.get("L"));
         }
     }
+
+    public static class Pillar extends Shape {
+        Pillar(int x, int y, BGColor color){
+            super(x, y, color, shapeForms.get("I"));
+        }
+    }
 }
