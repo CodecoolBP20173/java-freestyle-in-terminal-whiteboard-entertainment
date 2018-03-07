@@ -101,10 +101,41 @@ public class Board {
         System.out.print(logo);
 }      
 
+    public boolean isMovable(Shape sh, TerminalDirection dir){
+        int[] coords = sh.getCoords();
+        TerminalDirection[] formula = sh.getFormula();
+        
+        int shapeX = coords[0];
+        int shapeY = coords[1];
+        Coord shapePos = new Coord(shapeX, shapeY);
+        shapePos.changeCoords(dir);
+        int x = shapePos.getCoordArray()[0];
+        int y = shapePos.getCoordArray()[1];
+        boolean fits = true;
+
+        if(x >= this.column || x < 0 || y >= this.row || y < 0) {
+            return false;
+        } else {
+            for (TerminalDirection direct : formula) {
+                shapePos.changeCoords(direct);
+                x = shapePos.getCoordArray()[0];
+                y = shapePos.getCoordArray()[1];
+                // TODO: Make sure it checkes for other colors and also checkes the shape's sides and the board's sides
+                if (x >= this.column || x < 0 || y >= this.row || y < 0) {
+                    fits = false;
+                    break;
+                }
+            }
+            return fits;
+        }
+        
+    }
+
     Board(int row, int column) {
         this.row = row;
         this.column = column;
         this.board = new BGColor[row][column];
+        reset();
     }
 
 }
