@@ -83,7 +83,14 @@ public class Main {
                 }
                 else {
                     shapeIndex = rnd.nextInt(allShapes.length);
-                    currentShape = allShapes[shapeIndex];
+                    currentShape = allShapes[shapeIndex].clone();
+
+                    if (gameBoard.isMovable(currentShape, TerminalDirection.DOWN)) {
+                        gameBoard.addShape(currentShape, currentShape.getColor());
+                    }
+                    else {
+                        break;
+                    }
                 }
             }
 
