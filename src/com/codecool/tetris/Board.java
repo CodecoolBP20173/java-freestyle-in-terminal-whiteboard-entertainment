@@ -6,6 +6,7 @@ import com.codecool.tetris.Shapes.Shape;
 
 public class Board {
 
+    private final int moveDownTickCount;
     private final int row;
     private final int column;
     private BGColor[][] board;
@@ -132,10 +133,15 @@ public class Board {
         
     }
 
+    int getMoveDownTickCount() {
+        return this.moveDownTickCount;
+    }
+
     Board(int row, int column) {
         this.row = row;
         this.column = column;
         this.board = new BGColor[row][column];
+        this.moveDownTickCount = 14;
         reset();
     }
 

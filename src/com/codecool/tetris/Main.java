@@ -1,6 +1,8 @@
 package com.codecool.tetris;
 
 import com.codecool.termlib.*;
+
+import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.Arrays;
 
@@ -8,8 +10,15 @@ public class Main {
 
     private static final String hideCursor =  "\033[?25l";
     private static final String showCursor = "\033[?25h";
+    private static final int tickRate = 40;
 
     public static void main(String[] args) throws InterruptedException {
+        IOHandler ioHandler = new IOHandler(20);
+        Random rnd = new Random();
+        
+        ioHandler.setEchoStatus(false);
+        System.out.println(hideCursor);
+        
         int width = 15;
         int height = 30;
         if(args.length == 2){
@@ -40,32 +49,50 @@ public class Main {
             new Shapes.Pillar(startPosX, startPosY, BGColor.CYAN)
         };
 
+        int tickCount = 0;
+        char currentKey;
+        int shapeIndex = rnd.nextInt(allShapes.length);
+        Shapes.Shape currentShape = allShapes[shapeIndex];
+
         while(true) {
-            System.out.println(hideCursor);
-            
-            Random rnd = new Random();
-            int idx = rnd.nextInt(allShapes.length);
+            try {
+                currentKey = Character.toLowerCase((char)ioHandler.readFromBuffer());
 
-            Shapes.Shape sh = allShapes[i];
+                if (currentKey == 'a' || currentKey == 'd') {
+                    TerminalDirection direction = currentKey == 'a' ? TerminalDirection.LEFT : TerminalDirection.RIGHT;
 
-            TerminalDirection dir = TerminalDirection.DOWN;
-            gameBoard.addShape(sh, sh.getColor());
-
-            while(gameBoard.isMovable(sh, TerminalDirection.DOWN)) {
-                Thread.sleep(1000 - gameSpeed);
-                System.out.println("");
-                if(gameBoard.isMovable(sh, dir)) {
-                    gameBoard.removeShape(sh, BGColor.BLACK);
-                    sh.moveDown();
-                    gameBoard.addShape(sh, sh.getColor());
+                    if (gameBoard.isMovable(currentShape, direction)) {
+                        gameBoard.removeShape(currentShape, BGColor.BLACK);
+                        if (direction == TerminalDirection.LEFT) currentShape.moveLeft();
+                        else currentShape.moveRight();
+                        gameBoard.addShape(currentShape, currentShape.getColor());
+                    }
                 }
-            
-                gameBoard.render(t);
-            }
-            i++;
-            if(i>=allShapes.length){break;}
 
+            }
+            catch (NoSuchElementException ignore) {}
+            
+            
+            if (tickCount == gameBoard.getMoveDownTickCount()) {
+                tickCount = 0;
+                
+                if (gameBoard.isMovable(currentShape, TerminalDirection.DOWN)) {
+                    gameBoard.removeShape(currentShape, BGColor.BLACK);
+                    currentShape.moveDown();
+                    gameBoard.addShape(currentShape, currentShape.getColor());
+                }
+                else {
+                    shapeIndex = rnd.nextInt(allShapes.length);
+                    currentShape = allShapes[shapeIndex];
+                }
+            }
+            
+            tickCount++;
+            gameBoard.render(t);
+            Thread.sleep(1000 / tickRate);
         }
+        
+        ioHandler.setEchoStatus(false);
         System.out.println(showCursor);
     }
 }
