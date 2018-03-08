@@ -9,7 +9,7 @@ public class Main {
     private static final String hideCursor =  "\033[?25l";
     private static final String showCursor = "\033[?25h";
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, CloneNotSupportedException {
         int width = 15;
         int height = 30;
         if(args.length == 2){
@@ -46,7 +46,7 @@ public class Main {
             Random rnd = new Random();
             int idx = rnd.nextInt(allShapes.length);
 
-            Shapes.Shape sh = allShapes[i];
+            Shapes.Shape sh = allShapes[idx].clone();
 
             TerminalDirection dir = TerminalDirection.DOWN;
             gameBoard.addShape(sh, sh.getColor());
@@ -62,8 +62,9 @@ public class Main {
             
                 gameBoard.render(t);
             }
+
             i++;
-            if(i>=allShapes.length){break;}
+            if(i>=7){break;}
 
         }
         System.out.println(showCursor);
