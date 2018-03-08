@@ -145,10 +145,26 @@ public class Board {
         logo += "      o888o     o888ooooood8     o888o     o888o  o888o o888o 8\"\"88888P'";
                 
         System.out.print(logo);
-        System.out.print("\n\n\n");
-}      
+    }
+    
+    private boolean fitsInBounds(int x, int y){
+        if(x >= this.column || x < 0 || y >= this.row || y < 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private boolean hasShape(int x, int y){
+        if(this.board[y][x] == BGColor.BLACK){
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     public boolean isMovable(Shape sh, TerminalDirection dir){
+        this.removeShape(sh, BGColor.BLACK);
         int[] coords = sh.getCoords();
         TerminalDirection[] formula = sh.getFormula();
         
@@ -160,20 +176,21 @@ public class Board {
         int y = shapePos.getCoordArray()[1];
         boolean fits = true;
 
-        if(x >= this.column || x < 0 || y >= this.row || y < 0) {
-            return false;
-        } else {
+        if(fitsInBounds(x, y) && !hasShape(x, y)) {
             for (TerminalDirection direct : formula) {
                 shapePos.changeCoords(direct);
                 x = shapePos.getCoordArray()[0];
                 y = shapePos.getCoordArray()[1];
-                // TODO: Make sure it checkes for other colors and also checkes the shape's sides and the board's sides
-                if (x >= this.column || x < 0 || y >= this.row || y < 0) {
+                if (!fitsInBounds(x, y) || hasShape(x, y)) {
                     fits = false;
                     break;
                 }
             }
+            this.addShape(sh, sh.getColor());
             return fits;
+        } else {
+            this.addShape(sh, sh.getColor());
+            return false;
         }
         
     }
