@@ -55,7 +55,7 @@ public class Board {
                     }
                 }
 
-            } else if (score >= 10) {
+            } else if (score < 20 && score >= 10) {
 
                 for (Integer key : Girl.scoreCase2.keySet()) {
                     String value = Girl.scoreCase2.get(key);
