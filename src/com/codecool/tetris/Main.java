@@ -16,6 +16,7 @@ public class Main {
         IOHandler ioHandler = new IOHandler(20);
         Random rnd = new Random();
 
+        ioHandler.start();
         ioHandler.setEchoStatus(false);
         System.out.println(hideCursor);
 
@@ -52,7 +53,7 @@ public class Main {
         int tickCount = 0;
         char currentKey;
         int shapeIndex = rnd.nextInt(allShapes.length);
-        Shapes.Shape currentShape = allShapes[shapeIndex];
+        Shapes.Shape currentShape = allShapes[shapeIndex].clone();
 
         while(true) {
             try {
@@ -67,6 +68,17 @@ public class Main {
                         else currentShape.moveRight();
                         gameBoard.addShape(currentShape, currentShape.getColor());
                     }
+                }
+                else if (currentKey == 's') {
+                    if (gameBoard.isMovable(currentShape, TerminalDirection.DOWN)) {
+                        gameBoard.removeShape(currentShape, BGColor.BLACK);
+                        currentShape.moveDown();
+                        gameBoard.addShape(currentShape, currentShape.getColor());
+                        tickCount = gameBoard.getMoveDownTickCount();
+                    }
+                }
+                else if (currentKey == 'q') {
+                    break;
                 }
 
             }
@@ -95,11 +107,12 @@ public class Main {
             }
 
             tickCount++;
-            gameBoard.render(t);
+            if (tickCount % 5 == 0) gameBoard.render(t);
             Thread.sleep(1000 / tickRate);
         }
 
         ioHandler.setEchoStatus(false);
+        ioHandler.stop();
         System.out.println(showCursor);
     }
 }

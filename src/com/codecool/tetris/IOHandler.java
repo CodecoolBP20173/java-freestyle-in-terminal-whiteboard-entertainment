@@ -95,7 +95,7 @@ public class IOHandler {
         if (status) {
             cmd = new String[] {
                 "/bin/sh",
-                "-c",
+                "-c","echo \"asdasdasdasd\"",
                 "stty cooked echo"
             };
         }
