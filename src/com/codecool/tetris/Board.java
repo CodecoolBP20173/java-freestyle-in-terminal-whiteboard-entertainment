@@ -142,7 +142,7 @@ public class Board {
         logo += "       888       888oooo8         888       888ooo88P'   888   `\"Y8888o.   \n";
         logo += "       888       888    \"         888       888`88b.     888       `\"Y88b  \n";
         logo += "       888       888       o      888       888  `88b.   888  oo     .d8P  \n";
-        logo += "      o888o     o888ooooood8     o888o     o888o  o888o o888o 8\"\"88888P'";
+        logo += "      o888o     o888ooooood8     o888o     o888o  o888o o888o 8\"\"88888P'\n\n";
                 
         System.out.print(logo);
     }
