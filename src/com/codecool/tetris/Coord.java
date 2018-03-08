@@ -19,10 +19,10 @@ public class Coord {
     public void changeCoords(TerminalDirection direction) {
         switch (direction) {
             case UP:
-                this.y++;
+                this.y--;
                 break;
             case DOWN:
-                this.y--;
+                this.y++;
                 break;
             case RIGHT:
                 this.x++;
@@ -32,19 +32,19 @@ public class Coord {
                 break;
             case UPRIGHT:
                 this.x++;
-                this.y++;
+                this.y--;
                 break;
             case DOWNRIGHT:
                 this.x++;
-                this.y--;
+                this.y++;
                 break;
             case DOWNLEFT:
                 this.x--;
-                this.y--;
+                this.y++;
                 break;
             case UPLEFT:
                 this.x--;
-                this.y++;
+                this.y--;
                 break;
         }
     }

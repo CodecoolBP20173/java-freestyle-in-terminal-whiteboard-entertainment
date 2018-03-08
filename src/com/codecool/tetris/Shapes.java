@@ -16,9 +16,9 @@ public class Shapes {
             TerminalDirection.RIGHT
         });
         m.put("Z_mirrored", new TerminalDirection[] {
-            TerminalDirection.LEFT,
-            TerminalDirection.UPRIGHT,
-            TerminalDirection.RIGHT
+            TerminalDirection.DOWNLEFT,
+            TerminalDirection.RIGHT,
+            TerminalDirection.UPRIGHT
         });
         m.put("T", new TerminalDirection[] {
             TerminalDirection.DOWNLEFT,
@@ -33,7 +33,7 @@ public class Shapes {
         m.put("L_mirrored", new TerminalDirection[] {
             TerminalDirection.DOWN,
             TerminalDirection.DOWN,
-            TerminalDirection.Left
+            TerminalDirection.LEFT
         });
         m.put("I", new TerminalDirection[] {
             TerminalDirection.DOWN,
@@ -72,6 +72,10 @@ public class Shapes {
 
         public int[] getCoords() {
             return this.coords.getCoordArray();
+        }
+
+        public TerminalDirection[] getFormula() {
+            return this.formula;
         }
 
         Shape(int x, int y, BGColor color, TerminalDirection[] formula) {
