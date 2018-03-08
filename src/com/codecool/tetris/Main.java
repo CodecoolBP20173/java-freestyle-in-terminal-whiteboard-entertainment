@@ -45,27 +45,25 @@ public class Main {
             
             Random rnd = new Random();
             int idx = rnd.nextInt(allShapes.length);
-
             Shapes.Shape sh = allShapes[idx].clone();
 
-            TerminalDirection dir = TerminalDirection.DOWN;
-            gameBoard.addShape(sh, sh.getColor());
+            if(gameBoard.isMovable(sh, TerminalDirection.DOWN)){                /* This handles if I can place a new shape or not => gameOver */
+                TerminalDirection dir = TerminalDirection.DOWN;                 /* Might be a good idea to move it to a Board method */
+                gameBoard.addShape(sh, sh.getColor());
 
-            while(gameBoard.isMovable(sh, TerminalDirection.DOWN)) {
-                Thread.sleep(1000 - gameSpeed);
-                System.out.println("");
-                if(gameBoard.isMovable(sh, dir)) {
-                    gameBoard.removeShape(sh, BGColor.BLACK);
-                    sh.moveDown();
-                    gameBoard.addShape(sh, sh.getColor());
+                while(gameBoard.isMovable(sh, TerminalDirection.DOWN)) {
+                    Thread.sleep(1000 - gameSpeed);
+                    if(gameBoard.isMovable(sh, dir)) {
+                        gameBoard.removeShape(sh, BGColor.BLACK);
+                        sh.moveDown();
+                        gameBoard.addShape(sh, sh.getColor());
+                    }
+                
+                    gameBoard.render(t);
                 }
-            
-                gameBoard.render(t);
+            } else {
+                break;
             }
-
-            i++;
-            if(i>=7){break;}
-
         }
         System.out.println(showCursor);
     }
