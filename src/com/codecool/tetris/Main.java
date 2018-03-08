@@ -15,10 +15,10 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         IOHandler ioHandler = new IOHandler(20);
         Random rnd = new Random();
-        
+
         ioHandler.setEchoStatus(false);
         System.out.println(hideCursor);
-        
+
         int width = 15;
         int height = 30;
         if(args.length == 2){
@@ -71,11 +71,11 @@ public class Main {
 
             }
             catch (NoSuchElementException ignore) {}
-            
-            
+
+
             if (tickCount == gameBoard.getMoveDownTickCount()) {
                 tickCount = 0;
-                
+
                 if (gameBoard.isMovable(currentShape, TerminalDirection.DOWN)) {
                     gameBoard.removeShape(currentShape, BGColor.BLACK);
                     currentShape.moveDown();
@@ -86,12 +86,12 @@ public class Main {
                     currentShape = allShapes[shapeIndex];
                 }
             }
-            
+
             tickCount++;
             gameBoard.render(t);
             Thread.sleep(1000 / tickRate);
         }
-        
+
         ioHandler.setEchoStatus(false);
         System.out.println(showCursor);
     }

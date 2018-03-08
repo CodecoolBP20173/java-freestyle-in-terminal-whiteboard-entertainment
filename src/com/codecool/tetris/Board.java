@@ -2,6 +2,8 @@ package com.codecool.tetris;
 
 import com.codecool.termlib.*;
 import com.codecool.tetris.Shapes.Shape;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class Board {
@@ -10,6 +12,7 @@ public class Board {
     private final int row;
     private final int column;
     private BGColor[][] board;
+    private int score = 0;
 
     public void reset() {
         for (int i=0; i<row; i++){
@@ -20,12 +23,54 @@ public class Board {
     }
 
     public void render(Terminal t) {
-        printLogo();
+
+        t.clearScreen();
+        printLogo(t);
+
         for (int i=0; i<row; i++){
+
+            t.resetStyle();
+            System.out.print("        ");
+
             for (int j=0; j<column; j++) {
                 t.setBgColor(board[i][j]);
                 System.out.print("  ");
                 t.resetStyle();
+            }
+
+            if (i == 2) {
+                System.out.print("           Score: " + score);
+            } else if (i == 3) {
+                System.out.print("           Highest score:");                
+            }
+
+            if (score < 10) {
+                
+                for (Integer key : Girl.scoreCase1.keySet()) {
+                    String value = Girl.scoreCase1.get(key);
+                    if (key == i){
+                        System.out.print(value);
+                    }
+                }
+
+            } else if (score >= 10) {
+
+                for (Integer key : Girl.scoreCase2.keySet()) {
+                    String value = Girl.scoreCase2.get(key);
+                    if (key == i){
+                        System.out.print(value);
+                    }
+                }
+
+            } else if (score >= 20) {
+                
+                for (Integer key : Girl.scoreCase3.keySet()) {
+                    String value = Girl.scoreCase3.get(key);
+                    if (key == i){
+                        System.out.print(value);
+                    }
+                }
+
             }
             System.out.println("");
         }
@@ -42,6 +87,7 @@ public class Board {
                 return false;
             }
         }
+        score += 10;
         return true;
     }
 
@@ -85,25 +131,41 @@ public class Board {
 
     }
                                                                         
-    public void printLogo() {
-        System.out.print("\033[48;5;231m");
-        System.out.print("\033[38;5;202m");
+    public void printLogo(Terminal t) {
+        //System.out.print("\033[48;5;231m");
+        //System.out.print("\033[38;5;202m");
     
 
         String logo = "                                                                           \n";
-        logo += "  ooooooooooooo oooooooooooo ooooooooooooo ooooooooo.   ooooo  .oooooo..o  \n"; 
+        logo += "  ooooooooooooo oooooooooooo ooooooooooooo ooooooooo.   ooooo  .oooooo..o\n";
         logo += "  8'   888   `8 `888'     `8 8'   888   `8 `888   `Y88. `888' d8P'    `Y8  \n";
         logo += "       888       888              888       888   .d88'  888  Y88bo.       \n";
         logo += "       888       888oooo8         888       888ooo88P'   888   `\"Y8888o.   \n";
         logo += "       888       888    \"         888       888`88b.     888       `\"Y88b  \n";
         logo += "       888       888       o      888       888  `88b.   888  oo     .d8P  \n";
-        logo += "      o888o     o888ooooood8     o888o     o888o  o888o o888o 8\"\"88888P'   \n";
-        logo += "                                                                           \n\n\n";
-        
+        logo += "      o888o     o888ooooood8     o888o     o888o  o888o o888o 8\"\"88888P'";
+                
         System.out.print(logo);
-}      
+    }
+    
+    private boolean fitsInBounds(int x, int y){
+        if(x >= this.column || x < 0 || y >= this.row || y < 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private boolean hasShape(int x, int y){
+        if(this.board[y][x] == BGColor.BLACK){
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     public boolean isMovable(Shape sh, TerminalDirection dir){
+        this.removeShape(sh, BGColor.BLACK);
         int[] coords = sh.getCoords();
         TerminalDirection[] formula = sh.getFormula();
         
@@ -115,20 +177,21 @@ public class Board {
         int y = shapePos.getCoordArray()[1];
         boolean fits = true;
 
-        if(x >= this.column || x < 0 || y >= this.row || y < 0) {
-            return false;
-        } else {
+        if(fitsInBounds(x, y) && !hasShape(x, y)) {
             for (TerminalDirection direct : formula) {
                 shapePos.changeCoords(direct);
                 x = shapePos.getCoordArray()[0];
                 y = shapePos.getCoordArray()[1];
-                // TODO: Make sure it checkes for other colors and also checkes the shape's sides and the board's sides
-                if (x >= this.column || x < 0 || y >= this.row || y < 0) {
+                if (!fitsInBounds(x, y) || hasShape(x, y)) {
                     fits = false;
                     break;
                 }
             }
+            this.addShape(sh, sh.getColor());
             return fits;
+        } else {
+            this.addShape(sh, sh.getColor());
+            return false;
         }
         
     }
