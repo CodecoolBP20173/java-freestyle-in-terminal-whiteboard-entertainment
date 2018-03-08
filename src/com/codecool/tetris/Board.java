@@ -2,6 +2,8 @@ package com.codecool.tetris;
 
 import com.codecool.termlib.*;
 import com.codecool.tetris.Shapes.Shape;
+
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,7 +55,7 @@ public class Board {
                     }
                 }
 
-            } else if (score >= 10) {
+            } else if (score < 20 && score >= 10) {
 
                 for (Integer key : Girl.scoreCase2.keySet()) {
                     String value = Girl.scoreCase2.get(key);
@@ -76,16 +78,24 @@ public class Board {
         }
     }
 
+    public void refreshBoard() {
+        for (int i = 0; i < row; i++) {
+            if(this.isRowFull(this.board[i])) {
+                this.rearrangeRows(i);
+            }
+        }
+    }
+
     /*
     * Checks if a row is full, 
     * @param row A row full of BGColors
     **/
     public boolean isRowFull(BGColor[] row) {
-
-        for (int i=0; i<row.length; i++) {
-            if (row[i] == BGColor.BLACK) {
-                return false;
-            }
+        boolean l = true;
+        int i = 0;
+        while(l && i < row.length){
+            if(row[i] == BGColor.BLACK) return false;
+            i++;
         }
         score += 10;
         return true;
@@ -97,13 +107,9 @@ public class Board {
     * @param row An index of the row which is full
     **/
     public void rearrangeRows(int rowIndex) {
-
+        
         for (int i=rowIndex; i>0; i--) {
-            board[i] = board[i - 1];
-        }
-
-        for (int j=0; j<column; j++) {
-            board[0][j] = BGColor.BLACK;
+            this.board[i] = Arrays.copyOf(this.board[i-1], this.board[i-1].length);
         }
     }
 

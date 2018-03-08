@@ -20,7 +20,7 @@ public class Main {
         ioHandler.setEchoStatus(false);
         System.out.println(hideCursor);
 
-        int width = 15;
+        int width = 16;
         int height = 30;
         if(args.length == 2){
             try {
@@ -42,12 +42,14 @@ public class Main {
 
         Shapes.Shape[] allShapes = new Shapes.Shape[] {
             new Shapes.Square(startPosX, startPosY, BGColor.RED),
+            new Shapes.Pillar(startPosX, startPosY, BGColor.CYAN),
             new Shapes.LShape(startPosX, startPosY, BGColor.BLUE, true),
             new Shapes.LShape(startPosX, startPosY, BGColor.BLUE, false),
             new Shapes.TShape(startPosX, startPosY, BGColor.YELLOW),
             new Shapes.ZShape(startPosX, startPosY, BGColor.GREEN, true),
             new Shapes.ZShape(startPosX, startPosY, BGColor.GREEN, false),
-            new Shapes.Pillar(startPosX, startPosY, BGColor.CYAN)
+            new Shapes.Pillar(startPosX, startPosY, BGColor.CYAN),
+            new Shapes.Square(startPosX, startPosY, BGColor.RED)
         };
 
         int tickCount = 0;
@@ -94,6 +96,7 @@ public class Main {
                     gameBoard.addShape(currentShape, currentShape.getColor());
                 }
                 else {
+                    gameBoard.refreshBoard();
                     shapeIndex = rnd.nextInt(allShapes.length);
                     currentShape = allShapes[shapeIndex].clone();
 
@@ -107,7 +110,9 @@ public class Main {
             }
 
             tickCount++;
-            if (tickCount % 5 == 0) gameBoard.render(t);
+            if (tickCount % 5 == 0) {
+                gameBoard.render(t);
+            } 
             Thread.sleep(1000 / tickRate);
         }
 
