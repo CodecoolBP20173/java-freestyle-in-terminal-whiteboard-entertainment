@@ -31,7 +31,7 @@ public class Girl {
     }
 
 
-    public static final Map<Integer, String> scoreCase2 = fillMap();
+    public static final Map<Integer, String> scoreCase2 = fillMap2();
     private static Map<Integer, String> fillMap2() {
         Map<Integer, String> aMap = new HashMap<>();
         aMap.put(6, "                .---.");
@@ -53,7 +53,7 @@ public class Girl {
         return aMap;
     }
 
-    public static final Map<Integer, String> scoreCase3 = fillMap();
+    public static final Map<Integer, String> scoreCase3 = fillMap3();
     private static Map<Integer, String> fillMap3() {
         Map<Integer, String> aMap = new HashMap<>();
         aMap.put(6, "                    ___.-\"\"\"-.");
