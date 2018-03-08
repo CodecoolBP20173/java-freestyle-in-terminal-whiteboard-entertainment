@@ -115,4 +115,9 @@ public class IOHandler {
         }
     }
 
+
+    IOHandler(long workerSleepTime) {
+        worker = new Worker(workerSleepTime);
+        thread = new Thread(worker);
+    }
 }
