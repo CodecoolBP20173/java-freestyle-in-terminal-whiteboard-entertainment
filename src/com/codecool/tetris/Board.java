@@ -8,6 +8,7 @@ import java.util.Map;
 
 public class Board {
 
+    private final int moveDownTickCount;
     private final int row;
     private final int column;
     private BGColor[][] board;
@@ -26,7 +27,7 @@ public class Board {
         t.clearScreen();
         printLogo(t);
 
-        for (int i=0; i<row; i++){
+        for (int i=0; i<row; i++) {
 
             t.resetStyle();
             System.out.print("        ");
@@ -71,7 +72,7 @@ public class Board {
                 }
 
             }
-            System.out.println("");
+            System.out.println("\r");
         }
     }
 
@@ -135,14 +136,14 @@ public class Board {
         //System.out.print("\033[38;5;202m");
     
 
-        String logo = "                                                                           \n";
-        logo += "  ooooooooooooo oooooooooooo ooooooooooooo ooooooooo.   ooooo  .oooooo..o\n";
-        logo += "  8'   888   `8 `888'     `8 8'   888   `8 `888   `Y88. `888' d8P'    `Y8  \n";
-        logo += "       888       888              888       888   .d88'  888  Y88bo.       \n";
-        logo += "       888       888oooo8         888       888ooo88P'   888   `\"Y8888o.   \n";
-        logo += "       888       888    \"         888       888`88b.     888       `\"Y88b  \n";
-        logo += "       888       888       o      888       888  `88b.   888  oo     .d8P  \n";
-        logo += "      o888o     o888ooooood8     o888o     o888o  o888o o888o 8\"\"88888P'\n\n";
+        String logo = "                                                                           \r\n";
+        logo += "  ooooooooooooo oooooooooooo ooooooooooooo ooooooooo.   ooooo  .oooooo..o\r\n";
+        logo += "  8'   888   `8 `888'     `8 8'   888   `8 `888   `Y88. `888' d8P'    `Y8  \r\n";
+        logo += "       888       888              888       888   .d88'  888  Y88bo.       \r\n";
+        logo += "       888       888oooo8         888       888ooo88P'   888   `\"Y8888o.   \r\n";
+        logo += "       888       888    \"         888       888`88b.     888       `\"Y88b  \r\n";
+        logo += "       888       888       o      888       888  `88b.   888  oo     .d8P  \r\n";
+        logo += "      o888o     o888ooooood8     o888o     o888o  o888o o888o 8\"\"88888P' \r\n\r\n\r\n\r";
                 
         System.out.print(logo);
     }
@@ -195,10 +196,15 @@ public class Board {
         
     }
 
+    int getMoveDownTickCount() {
+        return this.moveDownTickCount;
+    }
+
     Board(int row, int column) {
         this.row = row;
         this.column = column;
         this.board = new BGColor[row][column];
+        this.moveDownTickCount = 15;
         reset();
     }
 
