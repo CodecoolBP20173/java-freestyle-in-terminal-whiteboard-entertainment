@@ -42,9 +42,7 @@ public class Board {
 
             if (i == 2) {
                 System.out.print("           Score: " + score);
-            } else if (i == 3) {
-                System.out.print("           Highest score:");                
-            }
+            } 
 
             if (score < 10) {
                 
@@ -64,10 +62,19 @@ public class Board {
                     }
                 }
 
-            } else if (score >= 20) {
+            } else if (score >= 20 && score < 30) {
                 
                 for (Integer key : Girl.scoreCase3.keySet()) {
                     String value = Girl.scoreCase3.get(key);
+                    if (key == i){
+                        System.out.print(value);
+                    }
+                }
+
+            } else if (score >= 30) {
+                
+                for (Integer key : Girl.scoreCase4.keySet()) {
+                    String value = Girl.scoreCase4.get(key);
                     if (key == i){
                         System.out.print(value);
                     }

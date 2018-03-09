@@ -72,4 +72,27 @@ public class Girl {
         return aMap;
     }
 
+
+    public static final Map<Integer, String> scoreCase4 = fillMap4();
+    private static Map<Integer, String> fillMap4() {
+        Map<Integer, String> aMap = new HashMap<>();
+        aMap.put(6, "            ,S&S&S&s,");
+        aMap.put(7, "            S&C ^^>S&");
+        aMap.put(8, "           &S`\\_ =_)`S");
+        aMap.put(9, "             .-)  (-.");
+        aMap.put(10, "            / /\\  /\\ \\  |||||");
+        aMap.put(11, "           / (_ \\/ _) \\/   @@");
+        aMap.put(12, "   .-._    \\ \\)____(__|c   _\\");
+        aMap.put(13, "    \\__)  //)|\\\\    (  \\ _( ");
+        aMap.put(14, "   .-._\\ //   __\\____\\ \\/_ __");
+        aMap.put(15, "    \\__)\\/   /) ) ) ) \\___(__\\");
+        aMap.put(16, "     \\ \\/  /` / | / |");
+        aMap.put(17, "      \\  /`   | | | |");
+        aMap.put(18, "       `'     \\ | \\ |");
+        aMap.put(19, "              (\\\\ (\\\\");
+        aMap.put(20, "              Y\\_\\Y\\_\\");
+
+        return aMap;
+    }
+
 }
